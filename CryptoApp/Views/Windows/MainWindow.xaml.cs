@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CryptoApp.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CryptoApp
 {
@@ -24,5 +12,19 @@ namespace CryptoApp
         {
             InitializeComponent();
         }
+
+        private void MenuItemThemeClick(object sender, RoutedEventArgs e)
+        {
+            string tag = (string)((FrameworkElement)sender).Tag;
+            bool pageThemeDark = false;
+            if (tag == "dark")
+            {
+                pageThemeDark = true;
+            }
+            MainWindowViewModel MainWindowViewModel = new MainWindowViewModel();
+            MainWindowViewModel.ThemePageDark = pageThemeDark;
+            MainWindowViewModel.ChangeColorTheme();
+        }
+
     }
 }
