@@ -28,14 +28,18 @@
             <DataGrid Name="dataCrypto" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="10">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Rank"  Binding="{Binding Rank}" Width="5*"/>
-                    <DataGridTextColumn Header="Name"  Binding="{Binding Name}" Width="15*"/>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="25*"/>
-                    <DataGridTextColumn Header="Supply" Binding="{Binding Supply}" Width="25*"/>
-                    <DataGridTextColumn Header="Max Supply" Binding="{Binding MaxSupply}" Width="25*"/>
+                    <DataGridTextColumn Header="Name"  Binding="{Binding Name}" Width="20*">
+                        <DataGridTextColumn.Foreground>
+                            <SolidColorBrush Color="#FF3E1927" Opacity="0.985"/>
+                        </DataGridTextColumn.Foreground>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="5*"/>
+                    <DataGridTextColumn Header="Supply" Binding="{Binding Supply}" Width="15*"/>
+                    <DataGridTextColumn Header="Max Supply" Binding="{Binding MaxSupply}" Width="15*"/>
                     <DataGridCheckBoxColumn Header="Market Cap" Binding="{Binding MarketCapUsd}" Width="15*"/>
                     <DataGridCheckBoxColumn Header="Volume by 24Hr" Binding="{Binding VolumeUsd24Hr}" Width="15*"/>
-                    <DataGridHyperlinkColumn Header="Change by 24Hr" Binding="{Binding ChangePercent24Hr}" Width="20*" />
-                    <DataGridCheckBoxColumn Header="Volume Weighted by 24Hr" Binding="{Binding Vwap24Hr}" Width="15*"/>
+                    <DataGridHyperlinkColumn Header="Change by 24Hr" Binding="{Binding ChangePercent24Hr}" Width="5*" />
+                    <DataGridCheckBoxColumn Header="Volume Weighted by 24Hr" Binding="{Binding Vwap24Hr}" Width="5*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
