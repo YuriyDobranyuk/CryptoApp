@@ -12,7 +12,7 @@ namespace CryptoApp.Models
         const string COLOR_BLACK = "#000000";
         const string COLOR_WHITE = "#ffffff";
         
-        public object ChangeColorTheme(bool ThemePageDark)
+        public string[] ChangeColorTheme(bool ThemePageDark)
         {
             string colorBG = COLOR_WHITE, colorFR = COLOR_BLACK; 
             if (ThemePageDark)

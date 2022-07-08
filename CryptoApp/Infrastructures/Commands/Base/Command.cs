@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CryptoApp.Infrastructures.Command.Base
+namespace CryptoApp.Infrastructures.Commands.Base
 {
     internal abstract class Command : ICommand
     {

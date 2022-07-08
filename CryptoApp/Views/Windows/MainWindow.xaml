@@ -6,45 +6,58 @@
         xmlns:vm="clr-namespace:CryptoApp.ViewModels"
         xmlns:local="clr-namespace:CryptoApp"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="800">
+        Title="{Binding Title}" Height="450" Width="800" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}" >
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
 
-    <DockPanel x:Name="mainBlock" Background="{Binding Path=ColorBackgroundTheme}">
-        <Menu DockPanel.Dock="Top" Foreground="{Binding Path=ColorForegroundTheme}">
-            <MenuItem Header="Color theme" Foreground="{Binding Path=ColorForegroundTheme}">
-                <MenuItem Header="Dark" Command="{Binding MenuItemThemeClick}" CommandParameter="true"></MenuItem>
-                <MenuItem Header="Light"  Command="{Binding MenuItemThemeClick}" CommandParameter="false"></MenuItem>
+    <DockPanel x:Name="mainBlock" Background="{Binding ColorBackgroundTheme}">
+        <Menu DockPanel.Dock="Top" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}">
+            <MenuItem Header="Color theme" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}">
+                <MenuItem Header="Dark" Command="{Binding MenuItemThemeClickCommand}" CommandParameter="true" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}"></MenuItem>
+                <MenuItem Header="Light"  Command="{Binding MenuItemThemeClickCommand}" CommandParameter="false" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Lang" Foreground="{Binding Path=ColorForegroundTheme}">
-                <MenuItem Header="EN"></MenuItem>
-                <MenuItem Header="RU"></MenuItem>
+            <MenuItem Header="Lang" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}">
+                <MenuItem Header="EN" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}"></MenuItem>
+                <MenuItem Header="RU" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}"></MenuItem>
             </MenuItem>
-            
+
         </Menu>
-       
-        <Grid>
-            <DataGrid Name="dataCrypto" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="10" Foreground="#FFD83636">
-                <DataGrid.Columns>
+
+        <Grid Background="{Binding ColorBackgroundTheme}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="745*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Name="dataCrypto" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="10" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}" Grid.ColumnSpan="2">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGrid}">
+                        <Setter Property="Background" Value="Green"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="Blue"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="LightGreen"/>
+                    </Style>
+                   
+                </DataGrid.Resources>
+                <DataGrid.Columns >
                     <DataGridTextColumn Header="Rank"  Binding="{Binding Rank}" Width="5*" />
-                    <DataGridTextColumn Header="Name"  Binding="{Binding Name}" Width="20*">
-                        <DataGridTextColumn.Foreground>
-                            <SolidColorBrush Color="#FF3E1927" Opacity="0.985"/>
-                        </DataGridTextColumn.Foreground>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="5*"/>
-                    <DataGridTextColumn Header="Supply" Binding="{Binding Supply}" Width="15*"/>
-                    <DataGridTextColumn Header="Max Supply" Binding="{Binding MaxSupply}" Width="15*"/>
-                    <DataGridCheckBoxColumn Header="Market Cap" Binding="{Binding MarketCapUsd}" Width="15*"/>
-                    <DataGridCheckBoxColumn Header="Volume by 24Hr" Binding="{Binding VolumeUsd24Hr}" Width="15*"/>
-                    <DataGridHyperlinkColumn Header="Change by 24Hr" Binding="{Binding ChangePercent24Hr}" Width="5*" />
-                    <DataGridCheckBoxColumn Header="Volume Weighted by 24Hr" Binding="{Binding Vwap24Hr}" Width="5*"/>
+                    <DataGridTextColumn Header="Name"  Binding="{Binding Name}" Width="15*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="10*"/>
+                    <DataGridTextColumn Header="Supply" Binding="{Binding Supply}" Width="10*"/>
+                    <DataGridTextColumn Header="Max Supply" Binding="{Binding MaxSupply}" Width="10*"/>
+                    <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapUsd}" Width="10*"/>
+                    <DataGridTextColumn Header="Volume by 24Hr" Binding="{Binding VolumeUsd24Hr}" Width="10*"/>
+                    <DataGridTextColumn Header="Change by 24Hr" Binding="{Binding ChangePercent24Hr}" Width="10*" />
+                    <DataGridTextColumn Header="Volume Weighted by 24Hr" Binding="{Binding Vwap24Hr}" Width="10*"/>
+                    <DataGridHyperlinkColumn Header="More" Width="5*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+
     </DockPanel>
-    
-    
-    
+
+
 </Window>

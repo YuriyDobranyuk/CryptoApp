@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CryptoApp.ViewModels.Base;
+using CryptoApp.Infrastructures.Commands;
+using CryptoApp.Models;
 
 
 namespace CryptoApp.ViewModels
@@ -12,24 +15,9 @@ namespace CryptoApp.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         private string _Title = "Program crypto manager";
-        private string colorBackgroundTheme, colorForegroundTheme;
+        private string colorBackgroundTheme = "#ffffff", colorForegroundTheme = "#000000";
         private bool themePageDark = false;
-        //readonly MyMathModel _model = new MyMathModel();
-
-        /*public MainWindowViewModel()
-        {
-            //таким нехитрым способом мы пробрасываем изменившиеся свойства модели во View
-            //_model.PropertyChanged += (s, e) => { RaisePropertyChanged(e.PropertyName); };
-            AddCommand = new DelegateCommand<string>(str => {
-                //проверка на валидность ввода - обязанность VM
-                int ival;
-                if (int.TryParse(str, out ival)) _model.AddValue(ival);
-            });
-            RemoveCommand = new DelegateCommand<int?>(i => {
-                if (i.HasValue) _model.RemoveValue(i.Value);
-            });
-        }*/
-
+       
         public string Title
         {
             get => _Title;
@@ -53,7 +41,31 @@ namespace CryptoApp.ViewModels
             set => Set(ref themePageDark, value);
         }
 
+        #region Commands
+
+        #region MenuItemThemeClickCommand
+        public ICommand MenuItemThemeClickCommand { get; }
+        private bool CanMenuItemThemeClickCommandExecute(object p) => true;
+        private void OnMenuItemThemeClickCommandExecute(object p) {
+           
+            bool.TryParse(p.ToString(), out bool pageThemeDark);
+            ThemePageDark = pageThemeDark;
+            ThemesApp ThemesApp = new ThemesApp();
+            string[] colorsTheme = ThemesApp.ChangeColorTheme(pageThemeDark);
+            ColorBackgroundTheme = colorsTheme[0];
+            ColorForegroundTheme = colorsTheme[1];
+        }
+        #endregion
 
 
+
+        #endregion
+
+        public MainWindowViewModel()
+        {
+            #region Comands
+            MenuItemThemeClickCommand = new LambdaCommand(OnMenuItemThemeClickCommandExecute, CanMenuItemThemeClickCommandExecute);
+            #endregion
+        }
     }
 }
