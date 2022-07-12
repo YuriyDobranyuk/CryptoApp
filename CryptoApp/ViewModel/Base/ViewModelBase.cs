@@ -1,35 +1,20 @@
-﻿using System;
-using System.Windows;
+﻿using System.ComponentModel;
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CryptoApp.ViewModels.Base;
-using CryptoApp.Infrastructures.Commands;
+using CryptoApp.Services.Commands;
 using CryptoApp.Models;
 
-
-namespace CryptoApp.ViewModels
+namespace CryptoApp.ViewModel.Base
 {
-    internal class MainWindowViewModel : ViewModel
+    internal abstract class ViewModelBase : INotifyPropertyChanged
     {
-        private string _Title = "Program crypto manager";
         private string colorBackgroundTheme = "#ffffff", colorForegroundTheme = "#000000";
         private bool themePageDark = false;
-       
-        public string Title
-        {
-            get => _Title;
-            set => Set(ref _Title, value);
-        }
-       
+
         public string ColorBackgroundTheme
         {
             get => colorBackgroundTheme;
             set => Set(ref colorBackgroundTheme, value);
         }
-
         public string ColorForegroundTheme
         {
             get => colorForegroundTheme;
@@ -41,13 +26,27 @@ namespace CryptoApp.ViewModels
             set => Set(ref themePageDark, value);
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+        protected virtual bool Set<T>(ref T field, T value, string PropertyName = null)
+        {
+            if (Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(PropertyName);
+            return true;
+        }
+
         #region Commands
 
         #region MenuItemThemeClickCommand
         public ICommand MenuItemThemeClickCommand { get; }
         private bool CanMenuItemThemeClickCommandExecute(object p) => true;
-        private void OnMenuItemThemeClickCommandExecute(object p) {
-           
+        private void OnMenuItemThemeClickCommandExecute(object p)
+        {
+
             bool.TryParse(p.ToString(), out bool pageThemeDark);
             ThemePageDark = pageThemeDark;
             ThemesApp ThemesApp = new ThemesApp();
@@ -57,15 +56,15 @@ namespace CryptoApp.ViewModels
         }
         #endregion
 
-
-
         #endregion
 
-        public MainWindowViewModel()
+        public ViewModelBase()
         {
             #region Comands
             MenuItemThemeClickCommand = new LambdaCommand(OnMenuItemThemeClickCommandExecute, CanMenuItemThemeClickCommandExecute);
             #endregion
         }
+
     }
+
 }

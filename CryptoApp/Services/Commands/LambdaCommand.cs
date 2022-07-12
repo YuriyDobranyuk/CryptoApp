@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CryptoApp.Infrastructures.Commands.Base;
+using CryptoApp.Services.Commands.Base;
 
-namespace CryptoApp.Infrastructures.Commands
+namespace CryptoApp.Services.Commands
 {
     internal class LambdaCommand : Command
     {
