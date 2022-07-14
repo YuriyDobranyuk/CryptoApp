@@ -1,4 +1,5 @@
 ﻿using CryptoApp.Services;
+using CryptoApp.View.Pages;
 using CryptoApp.ViewModel;
 
 namespace CryptoApp
@@ -11,6 +12,7 @@ namespace CryptoApp
         public MainWindow()
         {
             InitializeComponent();
+            this.Content = new CryptocurrenciesPage();
         }
     }
 }

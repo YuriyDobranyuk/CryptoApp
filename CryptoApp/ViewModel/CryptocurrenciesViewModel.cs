@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using CryptoApp.Models;
+using System.Windows;
+using CryptoApp.Model;
 using CryptoApp.Services;
 using CryptoApp.Services.Commands;
+using CryptoApp.View.Pages;
 using CryptoApp.ViewModel.Base;
 
 namespace CryptoApp.ViewModel
@@ -22,6 +24,16 @@ namespace CryptoApp.ViewModel
 
                 OnPropertyChanged(nameof(SearchText));
                 OnPropertyChanged(nameof(Cryptocurrencies));
+            }
+        }
+        private CryptocurrencyModel selectedElement;
+        public CryptocurrencyModel SelectedElement
+        {
+            get { return selectedElement; }
+            set
+            {
+                selectedElement = value;
+                OnPropertyChanged("SelectedElement");
             }
         }
 
@@ -46,7 +58,9 @@ namespace CryptoApp.ViewModel
             {
                 return new LambdaCommand(obj =>
                 {
-                    System.Console.WriteLine();
+                    var sel = this.SelectedElement; 
+                    var dvm = new DetailsPage(sel);
+                    Application.Current.MainWindow.Content = dvm;
                 });
             }
         }

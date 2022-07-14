@@ -1,4 +1,4 @@
-﻿namespace CryptoApp.Models
+﻿namespace CryptoApp.Model
 {
     class ThemesApp
     {
@@ -16,7 +16,5 @@
             string[] colorsTheme = {colorBG, colorFR};
             return colorsTheme;
         }
-
-
     }
 }

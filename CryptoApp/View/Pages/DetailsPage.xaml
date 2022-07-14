@@ -8,12 +8,56 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DetailsPage">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-    </Grid>
+    <DockPanel x:Name="mainBlock" Background="{Binding ColorBackgroundTheme}">
+        <Menu DockPanel.Dock="Top" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}">
+            <MenuItem Header="Color theme" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}">
+                <MenuItem Header="Dark" Command="{Binding MenuItemThemeClickCommand}" CommandParameter="true" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}"></MenuItem>
+                <MenuItem Header="Light"  Command="{Binding MenuItemThemeClickCommand}" CommandParameter="false" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Currency Page" Command="{Binding NavigateCryptocurrencyPageCommand}" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}">
+            </MenuItem>
+        </Menu>
+
+        <Grid Background="{Binding ColorBackgroundTheme}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel DataContext="{Binding DetailCryptocurrency}" Margin="10" Background="{Binding ColorBackgroundTheme}">
+                <TextBlock Text="Data crypto currency:" Foreground="DarkOrange" Width="300" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Id}"  Width="300" Foreground="DarkOrange" />
+                <TextBlock Text="{Binding Name}" Foreground="DarkOrange" Width="300" />
+                <TextBlock Text="{Binding Price}" Foreground="DarkOrange" Width="300" />
+                <TextBlock Text="{Binding Changes24h}" Foreground="DarkOrange" Width="300" />
+                <TextBlock Text="{Binding Volume24h}" Foreground="DarkOrange" Width="300" />
+                <TextBlock Text="{Binding MarketCap}" Foreground="DarkOrange" Width="300" />
+            </StackPanel>
+
+            <DataGrid Grid.Row="1" IsReadOnly="True" Height="Auto" AutoGenerateColumns="False" ItemsSource="{Binding DetailCryptocurrency.MarketsCryptocurrency}" Background="{Binding ColorBackgroundTheme}" Foreground="{Binding ColorForegroundTheme}" Margin="10">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGrid}">
+                        <Setter Property="Background" Value="Green"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="LightSteelBlue"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRowHeader}">
+                        <Setter Property="Background" Value="Yellow"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="Orange"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn MinWidth="100" Width="1*" Header="ExchangeId" Binding="{Binding ExchangeId}" />
+                    <DataGridTextColumn MinWidth="100" Width="1*" Header="BaseId" Binding="{Binding BaseId}" />
+                    <DataGridTextColumn MinWidth="100" Width="1*" Header="QuoteId" Binding="{Binding QuoteId}" />
+                    <DataGridTextColumn MinWidth="100" Width="1*" Header="Volume, Usd24Hr" Binding="{Binding VolumeUsd24Hr}" />
+                    <DataGridTextColumn MinWidth="100" Width="1*" Header="Price, Usd" Binding="{Binding PriceUsd}" />
+                    <DataGridTextColumn MinWidth="100" Width="1*" Header="Volume, Percent" Binding="{Binding VolumePercent}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
 </Page>

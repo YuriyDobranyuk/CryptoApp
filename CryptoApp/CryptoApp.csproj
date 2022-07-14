@@ -80,12 +80,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataTypes\MarketCryptocurrency.cs" />
     <Compile Include="DataTypes\Cryptocurrencies.cs" />
     <Compile Include="DataTypes\Cryptocurrency.cs" />
+    <Compile Include="DataTypes\MarketsCryptocurrency.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\DetailCryptocurrencyModel.cs" />
     <Compile Include="Model\CryptocurrencyModel.cs" />
+    <Compile Include="Model\MarketCryptocurrencyModel.cs" />
     <Compile Include="Model\ThemesApp.cs" />
     <Compile Include="Services\CoinCapService.cs" />
     <Compile Include="Services\Commands\Base\Command.cs" />

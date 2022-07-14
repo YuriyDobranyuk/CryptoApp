@@ -1,15 +1,27 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using CryptoApp.Services.Commands;
-using CryptoApp.Models;
+using CryptoApp.Model;
 
 namespace CryptoApp.ViewModel.Base
 {
     internal abstract class ViewModelBase : INotifyPropertyChanged
     {
+        private string titleApp = "Program crypto manager";
+        private string viewNamePage = "CryptocurrenciesPage";
         private string colorBackgroundTheme = "#ffffff", colorForegroundTheme = "#000000";
         private bool themePageDark = false;
 
+        public string TitleApp
+        {
+            get => titleApp;
+            set => Set(ref titleApp, value);
+        }
+        public string ViewNamePage
+        {
+            get => viewNamePage;
+            set => Set(ref viewNamePage, value);
+        }
         public string ColorBackgroundTheme
         {
             get => colorBackgroundTheme;
